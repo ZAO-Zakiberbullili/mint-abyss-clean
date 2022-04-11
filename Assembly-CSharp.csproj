@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F6B5C13B-8BF5-F1C6-B4A3-FAE5B5EDA915}</ProjectGuid>
+    <ProjectGuid>{B9EBFF8B-25D9-2D61-6E15-55E87E463F98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player\Data\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\Player\Attack\RifleBulletHit.cs" />
     <Compile Include="Assets\Scripts\Enemy\ElementaryMove.cs" />
     <Compile Include="Assets\Scripts\UI\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemySettings.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Assets\Scripts\Player\Attack\FireballHit.cs" />
     <Compile Include="Assets\Scripts\Player\StateMachine\PlayerStateMachine.cs" />
     <Compile Include="Assets\Scripts\Player\States\PlayerLandState.cs" />
+    <Compile Include="Assets\Scripts\Player\Attack\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Player\StateMachine\Player.cs" />
     <Compile Include="Assets\Scripts\Input\InputHandler.cs" />
     <Compile Include="Assets\Scripts\Player\Attack\SubmachineGunsBulletHit.cs" />
@@ -81,9 +83,7 @@
     <Compile Include="Assets\Scripts\Audio\DeadMenuAudio.cs" />
     <Compile Include="Assets\Scripts\Player\Attack\HealthAndMana.cs" />
     <Compile Include="Assets\Scripts\UI\DeadMenu.cs" />
-    <Compile Include="Assets\Scripts\Player\Attack\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Player\Attack\Rifle.cs" />
-    <Compile Include="Assets\Scripts\Player\Attack\RifleBulletHit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
