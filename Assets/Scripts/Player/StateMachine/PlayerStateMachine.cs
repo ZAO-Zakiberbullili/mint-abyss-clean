@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class PlayerStateMachine
+public class PlayerStateMachine : StateMachine
 {
-    public PlayerState CurrentState { get; private set; }
+    public new PlayerState currentState;
 
     public void Init(PlayerState startingState)
     {
-        CurrentState = startingState;
-        CurrentState.Enter();
+        currentState = startingState;
+        currentState.Enter();
     }
 
     public void ChangeState(PlayerState newState)
     {
-        CurrentState.Exit();
-        CurrentState = newState;
-        CurrentState.Enter();
+        currentState.Exit();
+        currentState = newState;
+        currentState.Enter();
     }
 }
