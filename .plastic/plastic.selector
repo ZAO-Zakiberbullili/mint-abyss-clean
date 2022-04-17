@@ -1,0 +1,4 @@
+repository "mint-abyss-clean@Zakiberbullili@cloud"
+  path "/"
+    br "/main"
+    co "/main"
