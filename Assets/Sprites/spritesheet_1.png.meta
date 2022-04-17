@@ -344,9 +344,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 34
-        y: 255
+        y: 256
         width: 12
-        height: 32
+        height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -387,7 +387,7 @@ TextureImporter:
         serializedVersion: 2
         x: 66
         y: 256
-        width: 12
+        width: 13
         height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -428,9 +428,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 255
-        width: 15
-        height: 31
+        y: 256
+        width: 14
+        height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -469,10 +469,10 @@ TextureImporter:
       name: spritesheet_1_7
       rect:
         serializedVersion: 2
-        x: 145
-        y: 254
-        width: 14
-        height: 32
+        x: 144
+        y: 256
+        width: 15
+        height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -639,7 +639,7 @@ TextureImporter:
         serializedVersion: 2
         x: 97
         y: 192
-        width: 16
+        width: 15
         height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -681,7 +681,7 @@ TextureImporter:
         serializedVersion: 2
         x: 129
         y: 192
-        width: 15
+        width: 14
         height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1771,12 +1771,12 @@ TextureImporter:
       name: spritesheet_1_69
       rect:
         serializedVersion: 2
-        x: 130
-        y: 160
+        x: 66
+        y: 224
         width: 13
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1792,12 +1792,12 @@ TextureImporter:
       name: spritesheet_1_70
       rect:
         serializedVersion: 2
-        x: 112
-        y: 224
-        width: 15
+        x: 66
+        y: 193
+        width: 13
         height: 31
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1813,12 +1813,12 @@ TextureImporter:
       name: spritesheet_1_71
       rect:
         serializedVersion: 2
-        x: 145
+        x: 34
         y: 224
-        width: 14
-        height: 30
+        width: 12
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1834,12 +1834,12 @@ TextureImporter:
       name: spritesheet_1_72
       rect:
         serializedVersion: 2
-        x: 66
+        x: 112
         y: 224
-        width: 12
+        width: 14
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1855,12 +1855,12 @@ TextureImporter:
       name: spritesheet_1_73
       rect:
         serializedVersion: 2
-        x: 66
-        y: 193
-        width: 13
-        height: 31
+        x: 144
+        y: 224
+        width: 14
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1876,12 +1876,12 @@ TextureImporter:
       name: spritesheet_1_74
       rect:
         serializedVersion: 2
-        x: 34
-        y: 224
-        width: 12
-        height: 31
+        x: 97
+        y: 160
+        width: 14
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1897,9 +1897,9 @@ TextureImporter:
       name: spritesheet_1_75
       rect:
         serializedVersion: 2
-        x: 97
+        x: 129
         y: 160
-        width: 16
+        width: 14
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}

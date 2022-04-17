@@ -1,20 +1,29 @@
 using UnityEngine;
 
-public class PlayerLandState : GroundedState
+public class PlayerLandState : PlayerGroundedState
 {
     public PlayerLandState(Player player, PlayerStateMachine stateMachine, PlayerData data, string animation) : base(player, stateMachine, data, animation) { }
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        Debug.Log("Land state");
+    }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        if (xInput != 0)
+        if (isExitingState) return;
+
+        if (player.input.x != 0)
         {
-            stateMachine.ChangeState(player.MoveState);
-        }   
+            stateMachine.ChangeState(player.moveState);
+        }
         else if (isAnimationFinished)
         {
-            stateMachine.ChangeState(player.IdleState);
+            stateMachine.ChangeState(player.idleState);
         }
     }
 }

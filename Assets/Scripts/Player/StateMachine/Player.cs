@@ -2,109 +2,151 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    #region StateVariables
-    public PlayerStateMachine StateMachine { get; private set; }
+    public PlayerStateMachine stateMachine;
 
-    public PlayerIdleState IdleState { get; private set; }
-    public PlayerMoveState MoveState { get; private set; }
-    public PlayerJumpState JumpState { get; private set; }
-    public PlayerInAirState InAirState { get; private set; }
-    public PlayerLandState LandState { get; private set; }
+    public PlayerIdleState idleState;
+    public PlayerMoveState moveState;
+    public PlayerInAirState inAirState;
+    public PlayerJumpState jumpState;
+    public PlayerFallState fallState;
+    public PlayerLandState landState; 
+    public PlayerWallSlideState wallSlideState;
+    public PlayerWallGrabState wallGrabState;
+    public PlayerWallClimbState wallClimbState;
+    public PlayerLedgeClimbState ledgeClimbState;
+    public PlayerWallJumpState wallJumpState;
+    public PlayerDashState dashState;
+    
+    public PlayerData data;
 
-    [SerializeField] 
-    private PlayerData data;
-    #endregion
+    public Animator animator;
+    public Rigidbody2D rb;
+    public Input input;
 
-    #region Components
-    public Animator Anim { get; private set; }
-    public InputHandler Input { get; private set; }
-    public Rigidbody2D RB { get; private set; }
-    #endregion
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private Transform ledgeCheck;
 
-    [SerializeField]
-    private Transform groundCheck;
+    private float groundCheckRadius = 0.3f;
+    private float wallCheckDistance = 0.5f;
 
-    [HideInInspector]
-    public Vector2 currentVelocity;
+    [HideInInspector] public int facingDirection;
 
-    public int FacingDirection { get; private set; }
-
-    #region  Unity Callback Functions
-    private void Awake()
+    void Awake()
     {
-        StateMachine = new PlayerStateMachine();
+        stateMachine = new PlayerStateMachine();
 
-        IdleState = new PlayerIdleState(this, StateMachine, data, "idle");
-        MoveState = new PlayerMoveState(this, StateMachine, data, "move");
-        JumpState = new PlayerJumpState(this, StateMachine, data, "inAir");
-        InAirState = new PlayerInAirState(this, StateMachine, data, "inAir");
-        LandState = new PlayerLandState(this, StateMachine, data, "land");
+        idleState = new PlayerIdleState(this, stateMachine, data, "idle");
+        moveState = new PlayerMoveState(this, stateMachine, data, "move");
+        inAirState = new PlayerInAirState(this, stateMachine, data, "inAir");
+        jumpState = new PlayerJumpState(this, stateMachine, data, "inAir");
+        fallState = new PlayerFallState(this, stateMachine, data, "fall");
+        landState = new PlayerLandState(this, stateMachine, data, "land");
+        wallSlideState = new PlayerWallSlideState(this, stateMachine, data, "wallSlide");
+        wallGrabState = new PlayerWallGrabState(this, stateMachine, data, "wallGrab");
+        wallClimbState = new PlayerWallClimbState(this, stateMachine, data, "wallClimb");
+        ledgeClimbState = new PlayerLedgeClimbState(this, stateMachine, data, "ledgeClimbState");
+        wallJumpState = new PlayerWallJumpState(this, stateMachine, data, "inAir");
+        dashState = new PlayerDashState(this, stateMachine, data, "inAir");
     }
 
-    private void Start()
+    void Start()
     {
-        Anim = GetComponent<Animator>();
-        Input = GetComponent<InputHandler>();
-        RB = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        input = GetComponent<Input>();
 
-        FacingDirection = 1;
+        facingDirection = 1;
 
-        StateMachine.Init(IdleState);
+        stateMachine.Init(idleState);
     }
 
-    private void Update()
+    void Update()
     {
-        StateMachine.CurrentState.LogicUpdate();
+        stateMachine.currentState.LogicUpdate();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        StateMachine.CurrentState.PhysicsUpdate();
-
-        currentVelocity = RB.velocity;
+        stateMachine.currentState.PhysicsUpdate();
     }
-    #endregion
 
-    #region Set Functions
     public void SetVelocityX(float velocity)
     {
-        RB.velocity = new Vector2(velocity, RB.velocity.y);
+        rb.velocity = new Vector2(velocity, rb.velocity.y);
     }
 
     public void SetVelocityY(float velocity)
     {
-        RB.velocity = new Vector2(RB.velocity.x, velocity);
+        rb.velocity = new Vector2(rb.velocity.x, velocity);
     }
-    #endregion
 
-    #region Check Functions
+    public float GetVelocityY()
+    {
+        return rb.velocity.y;
+    }
+
+    public void SetVelocity(float velocity, Vector2 angle, int direction)
+    {
+        angle.Normalize();
+
+        rb.velocity = new Vector2(angle.x * velocity * direction, angle.y * velocity);
+    }
+
+    public void SetVelocityZero()
+    {
+        rb.velocity = Vector2.zero;
+    }
+
     public bool CheckIfGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, data.groundCheckRadius, data.whatIsGround);
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
 
-    public void CheckIfShouldFlip(int xInput)
+    public bool CheckIfTouchingWall()
     {
-        if (xInput != 0 && xInput != FacingDirection)
+        return Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, whatIsGround);
+    }
+
+    public bool CheckIfTouchingWallBack()
+    {
+        return Physics2D.Raycast(wallCheck.position, Vector2.right * -1 * facingDirection, wallCheckDistance, whatIsGround);
+    }
+
+    public bool CheckIfTouchingLedge()
+    {
+        return Physics2D.Raycast(ledgeCheck.position, Vector2.right * facingDirection, wallCheckDistance, whatIsGround); 
+    }
+
+    public Vector2 DetermineCornerPosition()
+    {
+        RaycastHit2D xHit = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, whatIsGround);
+
+        float xDistance = xHit.distance;
+
+        RaycastHit2D yHit = Physics2D.Raycast(ledgeCheck.position + new Vector3(xDistance * facingDirection, 0f, 0f), Vector2.down, ledgeCheck.position.y - wallCheck.position.y, whatIsGround);
+
+        float yDistance = yHit.distance;
+
+        return new Vector2(wallCheck.position.x + xDistance * facingDirection, ledgeCheck.position.y - yDistance);
+    }
+
+    public void CheckIfShouldFlip(int x)
+    {
+        if (x != 0 && x != facingDirection)
         {
             Flip();
         }
     }
-    #endregion
-
-    private void AnimationTriggerFunction()
-    {
-        StateMachine.CurrentState.AnimationTrigger();
-    }
-
-    private void AnimationFinishTrigger()
-    {
-        StateMachine.CurrentState.AnimationFinishTrigger();
-    }
 
     private void Flip()
     {
-        FacingDirection *= -1;
+        facingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
+
+    private void AnimationTrigger() => stateMachine.currentState.AnimationTrigger();
+
+    private void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 }
