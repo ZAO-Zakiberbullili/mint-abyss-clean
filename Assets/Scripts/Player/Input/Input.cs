@@ -23,6 +23,8 @@ public class Input : MonoBehaviour
 
     private float dashStartTime;
 
+    public bool action;
+
     void Update()
     {
         CheckJumpInputHoldTime();
@@ -106,7 +108,23 @@ public class Input : MonoBehaviour
         }
     }
 
-    // add buttons for dialogues
+    public void OnAction(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            action = true;
+        }
+        
+        if (context.canceled)
+        {
+            action = false;
+        }
+    }
 
-    public void OnAction(InputAction.CallbackContext context) { }
+    public bool GetAction()
+    {
+        bool result = action;
+        action = false;
+        return result;
+    }
 }
